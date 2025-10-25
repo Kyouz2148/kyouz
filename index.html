@@ -44,12 +44,67 @@
     .mobile-menu-btn:hover{color:#fff;transform:scale(1.1)}
     .mobile-menu-btn svg{width:24px;height:24px;transition:transform 0.3s ease}
     
+    /* Menu mobile escondido por padrão */
+    nav{display:flex;gap:12px;align-items:center}
+    .mobile-overlay{display:none}
+    
     @media (max-width: 768px) {
       .mobile-menu-btn{display:block}
-      nav{position:fixed;top:0;right:-100%;width:250px;height:100vh;background:var(--card);backdrop-filter:blur(10px);flex-direction:column;justify-content:flex-start;padding:80px 20px 20px;transition:right 0.3s ease;z-index:1000;border-left:1px solid rgba(255,255,255,0.1)}
+      
+      /* Menu mobile - inicialmente escondido */
+      nav{
+        position:fixed;
+        top:0;
+        right:-100%;
+        width:280px;
+        height:100vh;
+        background:var(--card);
+        backdrop-filter:blur(20px);
+        flex-direction:column;
+        justify-content:flex-start;
+        align-items:stretch;
+        padding:80px 30px 30px;
+        transition:right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index:1000;
+        border-left:1px solid rgba(255,255,255,0.1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+      }
+      
+      /* Menu mobile ativo */
       nav.active{right:0}
-      nav a{width:100%;text-align:center;padding:12px;margin:4px 0;border-radius:8px}
-      .mobile-overlay{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:999}
+      
+      /* Links do menu mobile */
+      nav a{
+        width:100%;
+        text-align:left;
+        padding:15px 20px;
+        margin:5px 0;
+        border-radius:12px;
+        font-size:16px;
+        font-weight:500;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+      }
+      
+      nav a:hover {
+        background: rgba(124,58,237,0.15);
+        border-color: rgba(124,58,237,0.3);
+        transform: translateX(5px);
+      }
+      
+      /* Overlay escuro */
+      .mobile-overlay{
+        display:none;
+        position:fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+        background:rgba(0,0,0,0.6);
+        backdrop-filter: blur(2px);
+        z-index:999;
+        transition: opacity 0.3s ease;
+      }
       .mobile-overlay.active{display:block}
       
       /* Ajustar header mobile */
@@ -57,8 +112,13 @@
       .mobile-menu-btn { 
         position: relative; 
         z-index: 1001; 
-        padding: 6px; 
+        padding: 8px; 
         margin-left: auto;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      .mobile-menu-btn:hover {
+        background: rgba(255,255,255,0.1);
       }
     }
 
@@ -308,9 +368,9 @@
       <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
       
       <nav id="mobile-nav">
-        <a href="#projetos" onclick="closeMobileMenu(); smoothScrollTo('projetos'); return false;">Projetos</a>
-        <a href="#contato" onclick="closeMobileMenu(); smoothScrollTo('contato'); return false;">Contato</a>
-        <a href="#sobre" onclick="closeMobileMenu(); smoothScrollTo('sobre'); return false;">Sobre</a>
+        <a href="#projetos" onclick="closeMobileMenu(); smoothScrollTo('projetos'); return false;">📁 Projetos</a>
+        <a href="#contato" onclick="closeMobileMenu(); smoothScrollTo('contato'); return false;">💬 Contato</a>
+        <a href="#sobre" onclick="closeMobileMenu(); smoothScrollTo('sobre'); return false;">👨‍💻 Sobre</a>
         <!--<a href="#" class="btn">Baixar CV</a>-->
       </nav>
     </header>
@@ -612,15 +672,24 @@
       const nav = document.getElementById('mobile-nav');
       const overlay = document.querySelector('.mobile-overlay');
       const btn = document.querySelector('.mobile-menu-btn');
+      const body = document.body;
       
-      nav.classList.toggle('active');
-      overlay.classList.toggle('active');
+      if (!nav || !overlay || !btn) return;
       
-      // Animação do botão do menu
-      if (nav.classList.contains('active')) {
-        btn.style.transform = 'rotate(180deg)';
-      } else {
+      const isActive = nav.classList.contains('active');
+      
+      if (isActive) {
+        // Fechar menu
+        nav.classList.remove('active');
+        overlay.classList.remove('active');
         btn.style.transform = 'rotate(0deg)';
+        body.style.overflow = '';
+      } else {
+        // Abrir menu
+        nav.classList.add('active');
+        overlay.classList.add('active');
+        btn.style.transform = 'rotate(180deg)';
+        body.style.overflow = 'hidden'; // Previne scroll do body
       }
     }
     
@@ -628,10 +697,14 @@
       const nav = document.getElementById('mobile-nav');
       const overlay = document.querySelector('.mobile-overlay');
       const btn = document.querySelector('.mobile-menu-btn');
+      const body = document.body;
+      
+      if (!nav || !overlay || !btn) return;
       
       nav.classList.remove('active');
       overlay.classList.remove('active');
       btn.style.transform = 'rotate(0deg)';
+      body.style.overflow = '';
     }
     
     // Fechar menu ao redimensionar a tela
@@ -640,6 +713,23 @@
         closeMobileMenu();
       }
     });
+    
+    // Fechar menu com ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+    
+    // Prevenir scroll quando menu estiver aberto
+    document.addEventListener('touchmove', function(e) {
+      const nav = document.getElementById('mobile-nav');
+      if (nav && nav.classList.contains('active')) {
+        if (!nav.contains(e.target)) {
+          e.preventDefault();
+        }
+      }
+    }, { passive: false });
     
     // Animações de entrada na carga da página
     window.addEventListener('load', function() {
