@@ -1,50 +1,297 @@
 <!doctype html>
+<!-- 
+  PORTFÓLIO PESSOAL - KYOUZ
+  ========================
+  Este é meu site de portfólio desenvolvido com HTML5, CSS3 e JavaScript vanilla.
+  O objetivo é apresentar meus projetos de forma elegante e responsiva.
+  
+  Tecnologias utilizadas:
+  - HTML5 semântico para estrutura
+  - CSS3 com animações e glassmorphism
+  - JavaScript vanilla para interatividade
+  - Design responsivo mobile-first
+  
+  Autor: Alan Godois (Kyouz)
+  Data: Outubro 2025
+-->
 <html lang="pt-BR">
 <head>
+  <!-- Configurações básicas do documento -->
   <meta charset="utf-8" />
+  
+  <!-- Configuração da viewport para responsividade mobile -->
+  <!-- shrink-to-fit=no previne zoom automático no iOS -->
+  <!-- user-scalable=yes permite zoom manual do usuário -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=yes, minimum-scale=1, maximum-scale=5" />
+  
+  <!-- Cor do tema para a barra de status mobile (Android/iOS) -->
   <meta name="theme-color" content="#0f1724" />
+  
+  <!-- Configurações para Progressive Web App (PWA) -->
+  <!-- Permite que o site seja instalado como aplicativo -->
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  
+  <!-- Título da página (aparece na aba do navegador) -->
   <title>Kyouz</title>
+  
+  <!-- Descrição para SEO e compartilhamento em redes sociais -->
   <meta name="description" content="Portfólio de projetos de Alan Godois. Contato: email, Instagram, LinkedIn e GitHub." />
-  <!-- Favicon - ícone na aba do navegador -->
+  <!-- 
+    SISTEMA DE FAVICONS E ÍCONES
+    =============================
+    Configurei múltiplos formatos de ícones para garantir compatibilidade
+    com todos os dispositivos e navegadores. O logo.svg é meu design
+    personalizado com as iniciais "AG" em gradiente roxo/azul.
+  -->
+  <!-- Favicon principal em SVG (moderno e escalável) -->
   <link rel="icon" type="image/svg+xml" href="logo.svg">
+  
+  <!-- Favicons em PNG para compatibilidade com navegadores antigos -->
   <link rel="icon" type="image/png" sizes="32x32" href="logo.svg">
   <link rel="icon" type="image/png" sizes="16x16" href="logo.svg">
+  
+  <!-- Ícone para iOS quando site é adicionado à tela inicial -->
   <link rel="apple-touch-icon" sizes="180x180" href="logo.svg">
-  <!-- Favicon SVG moderno -->
+  
+  <!-- Favicon SVG como padrão (navegadores modernos) -->
   <link rel="icon" href="logo.svg" type="image/svg+xml">
   <style>
+    /* 
+      SISTEMA DE CORES E VARIÁVEIS CSS
+      =================================
+      Criei um sistema de design consistente usando CSS Custom Properties.
+      Isso me permite alterar cores em um local e elas se aplicam em todo o site.
+      
+      Paleta de cores escolhida:
+      - Fundo principal: Azul escuro (#0f1724) para um visual profissional
+      - Cards: Azul mais escuro (#0b1220) para contraste sutil
+      - Texto secundário: Cinza azulado (#94a3b8) para hierarquia visual
+      - Accent: Roxo vibrante (#7c3aed) para CTAs e elementos importantes
+      - Glass: Transparência sutil para efeitos de glassmorphism
+    */
     :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#7c3aed; --glass: rgba(255,255,255,0.08);
-      --radius:14px; --gap:20px; --maxw:1100px;
+      --bg:#0f1724;           /* Cor de fundo principal */
+      --card:#0b1220;         /* Cor dos cards e elementos secundários */
+      --muted:#94a3b8;        /* Cor para textos menos importantes */
+      --accent:#7c3aed;       /* Cor de destaque para botões e links */
+      --glass: rgba(255,255,255,0.08);  /* Transparência para efeitos glass */
+      --radius:14px;          /* Raio padrão para bordas arredondadas */
+      --gap:20px;             /* Espaçamento padrão entre elementos */
+      --maxw:1100px;          /* Largura máxima do conteúdo */
     }
+    
+    /* 
+      RESET E CONFIGURAÇÕES GLOBAIS
+      ==============================
+      Configuro o box-sizing para todos os elementos para facilitar
+      cálculos de layout. Border-box inclui padding e border na largura total.
+    */
     *{box-sizing:border-box}
+    
+    /* 
+      SCROLL SUAVE
+      ============
+      Quando clico nos links de navegação, o scroll acontece suavemente
+      ao invés de "pular" diretamente para a seção.
+    */
     html{scroll-behavior:smooth}
-    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,system-ui,-apple-system; background:var(--bg);color:#e6eef8;-webkit-font-smoothing:antialiased}
-    .container{max-width:var(--maxw);margin:32px auto;padding:24px;background:var(--bg);position:relative;z-index:1}
+    /* 
+      ESTILOS BASE DO DOCUMENTO
+      =========================
+      Configuração fundamental da página:
+      - height: 100% garante que o site ocupe toda a altura da tela
+      - margin: 0 remove espaçamentos padrão do navegador
+      - font-family: Stack de fontes modernas e legíveis
+      - background: Uso minha cor personalizada definida nas variáveis
+      - color: Texto claro para contraste com fundo escuro
+      - -webkit-font-smoothing: Suaviza fontes no macOS/iOS
+    */
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:Inter,Segoe UI,Roboto,system-ui,-apple-system; 
+      background:var(--bg);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased
+    }
+    
+    /* 
+      CONTAINER PRINCIPAL
+      ===================
+      Este é o wrapper principal que centraliza todo o conteúdo:
+      - max-width: Limita largura máxima para legibilidade em telas grandes
+      - margin: auto centraliza horizontalmente
+      - padding: Espaçamento interno para não grudar nas bordas
+      - background: Garante fundo consistente
+      - position/z-index: Controla camadas para efeitos visuais
+    */
+    .container{
+      max-width:var(--maxw);
+      margin:32px auto;
+      padding:24px;
+      background:var(--bg);
+      position:relative;
+      z-index:1
+    }
 
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .logo-link{text-decoration:none;display:block;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
-    .logo-link:hover{transform:scale(1.05) rotate(5deg)}
-    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 6px 18px rgba(124,58,237,0.18);cursor:pointer;overflow:hidden;position:relative;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
-    .logo:hover{box-shadow:0 8px 25px rgba(124,58,237,0.4);background:linear-gradient(135deg,#8b5cf6,#06b6d4)}
-    .logo img{width:100%;height:100%;object-fit:cover;border-radius:12px;position:absolute;top:0;left:0}
-    .logo small{font-size:18px;color:#fff;z-index:1}
+    /* 
+      HEADER E NAVEGAÇÃO PRINCIPAL
+      ============================
+      O header contém minha marca pessoal e navegação.
+      Uso flexbox para alinhamento responsivo.
+    */
+    header{
+      display:flex;
+      align-items:center;           /* Centraliza verticalmente */
+      justify-content:space-between; /* Logo à esquerda, menu à direita */
+      gap:16px                      /* Espaço entre elementos */
+    }
+    
+    /* 
+      SEÇÃO DA MARCA/LOGO
+      ===================
+      Combina meu logo com informações pessoais
+    */
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px                      /* Espaço entre logo e texto */
+    }
+    
+    /* 
+      LINK DO LOGO
+      ============
+      Wrapper clicável do logo com animações suaves.
+      Transform é animado para feedback visual no hover.
+    */
+    .logo-link{
+      text-decoration:none;
+      display:block;
+      transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) /* Transição suave */
+    }
+    .logo-link:hover{
+      transform:scale(1.05) rotate(5deg)  /* Cresce e rotaciona levemente */
+    }
+    /* 
+      DESIGN DO LOGO
+      ==============
+      Meu logo é um quadrado com gradiente e as iniciais "AG".
+      Uso propriedades modernas para um visual profissional:
+      - border-radius: Cantos arredondados suaves
+      - background: Gradiente linear da cor accent para azul
+      - box-shadow: Sombra sutil para profundidade
+      - position: relative para controlar camadas dos elementos filhos
+    */
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),#3b82f6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      box-shadow:0 6px 18px rgba(124,58,237,0.18);
+      cursor:pointer;
+      overflow:hidden;
+      position:relative;
+      transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+    }
+    
+    /* Efeito hover do logo com gradiente animado */
+    .logo:hover{
+      box-shadow:0 8px 25px rgba(124,58,237,0.4);
+      background:linear-gradient(135deg,#8b5cf6,#06b6d4)
+    }
+    
+    /* 
+      IMAGEM E TEXTO DO LOGO
+      ======================
+      Se a imagem carregar, ela é exibida. Se não, mostro as iniciais "AG".
+      Uso z-index para controlar qual elemento fica na frente.
+    */
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;           /* Mantém proporção da imagem */
+      border-radius:12px;
+      position:absolute;
+      top:0;
+      left:0
+    }
+    .logo small{
+      font-size:18px;
+      color:#fff;
+      z-index:1                   /* Fica acima da imagem se necessário */
+    }
+    /* 
+      NAVEGAÇÃO PRINCIPAL
+      ===================
+      Em desktop, a navegação é horizontal ao lado do logo.
+      Uso flexbox para alinhamento e transições suaves para interatividade.
+    */
     nav{display:flex;gap:12px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative}
-    nav a:hover{background:var(--glass);color:#fff;transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,58,237,0.2)}
-    nav a:active{transform:translateY(0);transition:all 0.1s ease}
     
-    /* Mobile menu */
-    .mobile-menu-btn{display:none;background:none;border:none;color:var(--muted);cursor:pointer;padding:8px;transition:all 0.3s ease}
-    .mobile-menu-btn:hover{color:#fff;transform:scale(1.1)}
-    .mobile-menu-btn svg{width:24px;height:24px;transition:transform 0.3s ease}
+    /* 
+      LINKS DE NAVEGAÇÃO
+      ==================
+      Cada link tem estados visuais claros:
+      - Estado normal: Texto discreto (--muted)
+      - Hover: Fundo sutil e texto branco para feedback
+      - Active: Transição rápida para responsividade ao toque
+    */
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:10px;
+      transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position:relative
+    }
+    nav a:hover{
+      background:var(--glass);
+      color:#fff;
+      transform:translateY(-1px);     /* Eleva sutilmente */
+      box-shadow:0 4px 12px rgba(124,58,237,0.2)
+    }
+    nav a:active{
+      transform:translateY(0);        /* Volta à posição original */
+      transition:all 0.1s ease       /* Transição mais rápida para toque */
+    }
     
-    /* Menu mobile - escondido por padrão */
+    /* 
+      MENU MOBILE - BOTÃO HAMBÚRGUER
+      ==============================
+      Este botão só aparece em telas pequenas (definido nas media queries).
+      Tem feedback visual no hover para melhor UX.
+    */
+    .mobile-menu-btn{
+      display:none;                   /* Escondido por padrão */
+      background:none;
+      border:none;
+      color:var(--muted);
+      cursor:pointer;
+      padding:8px;
+      transition:all 0.3s ease
+    }
+    .mobile-menu-btn:hover{
+      color:#fff;
+      transform:scale(1.1)            /* Cresce levemente no hover */
+    }
+    .mobile-menu-btn svg{
+      width:24px;
+      height:24px;
+      transition:transform 0.3s ease
+    }
+    
+    /* 
+      CONFIGURAÇÕES BASE DO MENU MOBILE
+      =================================
+      Por padrão, mantenho a navegação como flexbox horizontal
+      e escondo o overlay. Isso é sobrescrito nas media queries.
+    */
     nav{display:flex;gap:12px;align-items:center}
     .mobile-overlay{display:none !important}
     
@@ -181,85 +428,544 @@
       }
     }
 
-    .hero{display:flex;gap:28px;align-items:center;margin-top:28px}
+    /* 
+      SEÇÃO HERO (ÁREA PRINCIPAL)
+      ===========================
+      Esta é a primeira seção que o usuário vê. Uso layout flexbox
+      para dividir entre conteúdo principal (esquerda) e card de contato (direita).
+    */
+    .hero{
+      display:flex;
+      gap:28px;                   /* Espaço entre as duas colunas */
+      align-items:center;         /* Alinha verticalmente no centro */
+      margin-top:28px
+    }
+    
+    /* 
+      COLUNA ESQUERDA - CONTEÚDO PRINCIPAL
+      ====================================
+      Contém meu título, descrição e botões de ação.
+      flex:1 faz ela ocupar todo espaço disponível.
+    */
     .hero-left{flex:1}
-    h1{margin:0;font-size:32px;line-height:1.05}
-    p.lead{color:var(--muted);margin-top:12px}
-    .cta{display:flex;gap:12px;margin-top:18px}
-    .btn{background:var(--accent);border:none;padding:10px 16px;border-radius:10px;color:#fff;cursor:pointer;font-weight:600;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden;transform:translateY(0)}
-    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(124,58,237,0.4);background:linear-gradient(135deg,var(--accent),#8b5cf6)}
-    .btn:active{transform:translateY(-1px);transition:all 0.1s ease}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
-    .btn.ghost:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3);transform:translateY(-2px);box-shadow:0 4px 15px rgba(255,255,255,0.1)}
+    
+    /* 
+      TIPOGRAFIA PRINCIPAL
+      ====================
+      Hierarquia visual clara com tamanhos e cores diferentes:
+      - H1: Título principal grande e impactante
+      - .lead: Texto de apoio em cor mais discreta
+    */
+    h1{
+      margin:0;
+      font-size:32px;
+      line-height:1.05           /* Linha apertada para impacto visual */
+    }
+    p.lead{
+      color:var(--muted);        /* Cor mais discreta que o título */
+      margin-top:12px
+    }
+    
+    /* 
+      CALL-TO-ACTION (BOTÕES PRINCIPAIS)
+      ==================================
+      Área com os botões de ação mais importantes do site.
+    */
+    .cta{
+      display:flex;
+      gap:12px;                  /* Espaço entre botões */
+      margin-top:18px
+    }
+    /* 
+      DESIGN DOS BOTÕES
+      =================
+      Sistema de botões consistente com animações suaves.
+      Uso hover com translateY para criar movimento vertical elegante.
+    */
+    .btn{
+      background:var(--accent);
+      border:none;
+      padding:10px 16px;
+      border-radius:10px;
+      color:#fff;
+      cursor:pointer;
+      font-weight:600;
+      transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transição suave */
+      position:relative;
+      overflow:hidden;
+      transform:translateY(0)     /* Estado inicial para animações */
+    }
+    
+    /* 
+      HOVER DOS BOTÕES
+      ===============
+      Animação que eleva o botão e adiciona brilho com gradiente.
+    */
+    .btn:hover{
+      transform:translateY(-2px); /* Move para cima */
+      box-shadow:0 8px 25px rgba(124,58,237,0.4); /* Sombra colorida */
+      background:linear-gradient(135deg,var(--accent),#8b5cf6) /* Gradiente no hover */
+    }
+    .btn:active{
+      transform:translateY(-1px); /* Retorna parcialmente quando clicado */
+      transition:all 0.1s ease   /* Transição mais rápida no clique */
+    }
+    
+    /* 
+      BOTÃO FANTASMA (SECUNDÁRIO)
+      ===========================
+      Variação transparente do botão para ações secundárias.
+    */
+    .btn.ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.12);
+      transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+    }
+    .btn.ghost:hover{
+      background:rgba(255,255,255,0.08); /* Fundo sutil no hover */
+      border-color:rgba(255,255,255,0.3); /* Borda mais visível */
+      transform:translateY(-2px);
+      box-shadow:0 4px 15px rgba(255,255,255,0.1)
+    }
 
+    /* 
+      CARD DE CONTATO (COLUNA DIREITA)
+      ================================
+      Largura fixa para o card lateral. Design detalhado definido abaixo.
+    */
     .hero-right{width:360px}
-    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 8px 24px rgba(2,6,23,0.6);word-wrap:break-word;}
+    
+    /* 
+      DESIGN PADRÃO DE CARDS
+      ======================
+      Base para todos os cards do site com glassmorphism.
+    */
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:var(--radius);
+      box-shadow:0 8px 24px rgba(2,6,23,0.6); /* Sombra profunda */
+      word-wrap:break-word;       /* Quebra palavras longas */
+    }
 
+    /* 
+      SEÇÃO DE PROJETOS
+      =================
+      Grade de 3 colunas mostrando meu portfólio de trabalhos.
+    */
     .projects{margin-top:28px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
-    .project{background:var(--card);padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:12px;min-height:170px;word-wrap:break-word;overflow-wrap:break-word;position:relative;z-index:1;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);border:1px solid transparent}
-    .project:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(0,0,0,0.4);border-color:rgba(124,58,237,0.3);background:linear-gradient(135deg,var(--card),rgba(124,58,237,0.05))}
-    .proj-thumb{height:110px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--muted);font-size:14px;text-align:center;padding:8px;transition:all 0.3s ease}
-    .project:hover .proj-thumb{background:rgba(124,58,237,0.2);color:#fff}
-    .proj-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-    .tags{display:flex;gap:8px;flex-wrap:wrap}
-    .tag{font-size:12px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,0.08);color:var(--muted);white-space:nowrap}
+    
+    /* 
+      GRID DE PROJETOS
+      ===============
+      Layout responsivo em 3 colunas com espaçamento uniforme.
+    */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr); /* 3 colunas iguais */
+      gap:var(--gap)              /* Espaçamento definido na variável global */
+    }
+    
+    /* 
+      CARD DE PROJETO INDIVIDUAL
+      ==========================
+      Cada projeto tem seu próprio card com hover animado.
+      min-height garante altura mínima mesmo com pouco conteúdo.
+    */
+    .project{
+      background:var(--card);
+      padding:14px;
+      border-radius:12px;
+      display:flex;
+      flex-direction:column;      /* Conteúdo empilhado verticalmente */
+      gap:12px;                   /* Espaço entre elementos internos */
+      min-height:170px;           /* Altura mínima para uniformidade */
+      word-wrap:break-word;       /* Quebra palavras longas */
+      overflow-wrap:break-word;   /* Compatibilidade adicional */
+      position:relative;
+      z-index:1;                  /* Controle de camadas */
+      transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border:1px solid transparent /* Borda invisível que fica visível no hover */
+    }
+    
+    /* 
+      HOVER DO PROJETO
+      ===============
+      Animação que eleva o card e adiciona borda colorida.
+    */
+    .project:hover{
+      transform:translateY(-4px); /* Eleva mais que os botões */
+      box-shadow:0 12px 35px rgba(0,0,0,0.4); /* Sombra mais dramática */
+      border-color:rgba(124,58,237,0.3); /* Borda roxa no hover */
+      background:linear-gradient(135deg,var(--card),rgba(124,58,237,0.05)) /* Sutil toque colorido */
+    }
+    
+    /* 
+      THUMBNAIL/PREVIEW DO PROJETO
+      ============================
+      Área de visualização do projeto com placeholder.
+    */
+    .proj-thumb{
+      height:110px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.08); /* Fundo sutil */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:600;
+      color:var(--muted);
+      font-size:14px;
+      text-align:center;
+      padding:8px;
+      transition:all 0.3s ease
+    }
+    
+    /* 
+      HOVER DO THUMBNAIL
+      =================
+      Muda cor quando o projeto todo está em hover.
+    */
+    .project:hover .proj-thumb{
+      background:rgba(124,58,237,0.2); /* Fundo roxo */
+      color:#fff                       /* Texto branco */
+    }
+    
+    /* 
+      METADADOS DO PROJETO
+      ===================
+      Informações como tags e links, organizadas horizontalmente.
+    */
+    .proj-meta{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;             /* Quebra linha se necessário */
+      gap:8px
+    }
+    
+    /* 
+      SISTEMA DE TAGS
+      ==============
+      Tags de tecnologia/categoria para cada projeto.
+    */
+    .tags{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap              /* Tags quebram linha se necessário */
+    }
+    .tag{
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:999px;        /* Totalmente arredondada */
+      background:rgba(255,255,255,0.08);
+      color:var(--muted);
+      white-space:nowrap          /* Impede quebra de linha dentro da tag */
+    }
 
-    .contact{margin-top:32px;display:flex;gap:20px;align-items:center;justify-content:space-between}
-    .contact .links{display:flex;gap:12px}
-    .social{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.08);color:var(--muted);text-decoration:none;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden}
-    .social:hover{background:rgba(255,255,255,0.15);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,255,255,0.1)}
-    .social:active{transform:translateY(-1px);transition:all 0.1s ease}
-    .social svg{width:18px;height:18px;transition:transform 0.3s ease}
-    .social:hover svg{transform:scale(1.1)}
+    /* 
+      SEÇÃO DE CONTATO
+      ===============
+      Área final com links sociais e informações de contato.
+      Layout flexbox distribuindo espaço entre conteúdo e links.
+    */
+    .contact{
+      margin-top:32px;
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content:space-between /* Distribui espaço uniformemente */
+    }
+    
+    /* 
+      CONTAINER DOS LINKS SOCIAIS
+      ===========================
+      Agrupa os ícones de redes sociais horizontalmente.
+    */
+    .contact .links{
+      display:flex;
+      gap:12px
+    }
+    
+    /* 
+      DESIGN DOS LINKS SOCIAIS
+      ========================
+      Botões de redes sociais com efeito glassmorphism.
+      Uso inline-flex para melhor controle do alinhamento.
+    */
+    .social{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;                    /* Espaço entre ícone e texto */
+      padding:8px 12px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.08); /* Fundo transparente */
+      color:var(--muted);
+      text-decoration:none;       /* Remove sublinhado padrão dos links */
+      transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position:relative;
+      overflow:hidden             /* Esconde elementos que saem da área */
+    }
+    /* 
+      HOVER DOS LINKS SOCIAIS
+      ======================
+      Animações de feedback visual quando o usuário passa o mouse.
+    */
+    .social:hover{
+      background:rgba(255,255,255,0.15); /* Fundo mais claro */
+      color:#fff;                        /* Texto fica branco */
+      transform:translateY(-2px);        /* Eleva levemente */
+      box-shadow:0 6px 20px rgba(255,255,255,0.1) /* Sombra sutil */
+    }
+    .social:active{
+      transform:translateY(-1px);        /* Retorna parcialmente quando clicado */
+      transition:all 0.1s ease          /* Transição mais rápida */
+    }
+    
+    /* 
+      ÍCONES DOS LINKS SOCIAIS
+      =======================
+      SVGs com animação de escala no hover.
+    */
+    .social svg{
+      width:18px;
+      height:18px;
+      transition:transform 0.3s ease
+    }
+    .social:hover svg{
+      transform:scale(1.1)               /* Cresce 10% no hover */
+    }
 
-    footer{margin-top:40px;color:var(--muted);font-size:13px;text-align:center}
+    /* 
+      RODAPÉ
+      ======
+      Informações finais da página com estilo discreto.
+    */
+    footer{
+      margin-top:40px;
+      color:var(--muted);                /* Cor discreta */
+      font-size:13px;                    /* Texto pequeno */
+      text-align:center
+    }
 
-    /* responsive */
+    /* 
+      ==========================================
+      DESIGN RESPONSIVO - MEDIA QUERIES
+      ==========================================
+      Sistema de breakpoints para diferentes tamanhos de tela.
+      Uso abordagem mobile-first com max-width para desktop.
+    */
+    
+    /* 
+      DESKTOP GRANDE (1200px+)
+      =======================
+      Ajustes para telas muito grandes.
+    */
     @media (max-width: 1200px) {
-      .container { max-width: 95%; padding: 20px; }
+      .container { 
+        max-width: 95%;           /* Container ocupa mais espaço */
+        padding: 20px;            /* Padding reduzido */
+      }
     }
     
+    /* 
+      TABLET/DESKTOP PEQUENO (980px)
+      ==============================
+      Layout muda para 2 colunas e hero fica vertical.
+    */
     @media (max-width: 980px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
-      .hero { flex-direction: column; gap: 24px; }
-      .hero-right { width: 100%; max-width: 500px; }
-      .contact { flex-direction: column; gap: 24px; align-items: stretch; }
-      .contact > div:last-child { width: 100%; max-width: 500px; }
+      /* Grade de projetos vira 2 colunas */
+      .grid { 
+        grid-template-columns: repeat(2, 1fr); 
+      }
+      
+      /* Hero fica vertical (coluna) */
+      .hero { 
+        flex-direction: column;   /* Muda de horizontal para vertical */
+        gap: 24px; 
+      }
+      
+      /* Card lateral fica menor */
+      .hero-right { 
+        width: 100%;              /* Ocupa largura total */
+        max-width: 500px;         /* Mas com limite máximo */
+      }
+      
+      /* Contato também fica vertical */
+      .contact { 
+        flex-direction: column; 
+        gap: 24px; 
+        align-items: stretch;     /* Elementos ocupam largura total */
+      }
+      
+      /* Links sociais centralizados */
+      .contact > div:last-child { 
+        width: 100%; 
+        max-width: 500px; 
+      }
     }
     
+    /* 
+      TABLET PEQUENO/MOBILE GRANDE (768px)
+      ====================================
+      Ajustes mais significativos para dispositivos móveis.
+      Header fica horizontal, botões ocupam largura total.
+    */
     @media (max-width: 768px) {
-      .container { padding: 12px; margin: 8px auto; }
-      header { flex-direction: row; gap: 12px; text-align: left; justify-content: space-between; align-items: center; }
-      .brand { justify-content: flex-start; gap: 10px; }
-      .brand h2 { font-size: 18px; margin: 0; }
-      .brand div { font-size: 11px; }
-      .logo { width: 40px; height: 40px; }
-      .logo small { font-size: 14px; }
-      nav { flex-wrap: wrap; justify-content: center; }
-      h1 { font-size: 24px; line-height: 1.3; margin-bottom: 8px; }
-      .hero { gap: 16px; margin-top: 20px; }
-      .hero-left { text-align: center; }
-      .cta { flex-direction: column; gap: 8px; margin-top: 12px; }
-      .btn { width: 100%; padding: 12px 16px; }
-      .projects { margin-top: 20px; }
-      .project { padding: 12px; }
-      .proj-meta { flex-direction: column; gap: 8px; align-items: flex-start; }
-      .proj-meta > div:last-child { align-self: stretch; }
-      .contact { margin-top: 24px; }
-      .contact form { max-width: 100%; }
-      .card { padding: 14px; }
+      /* Container com menos padding em mobile */
+      .container { 
+        padding: 12px; 
+        margin: 8px auto; 
+      }
+      
+      /* Header ajustado para mobile */
+      header { 
+        flex-direction: row;      /* Mantém horizontal */
+        gap: 12px; 
+        text-align: left; 
+        justify-content: space-between; 
+        align-items: center; 
+      }
+      
+      /* Brand mais compacta */
+      .brand { 
+        justify-content: flex-start; 
+        gap: 10px; 
+      }
+      .brand h2 { 
+        font-size: 18px;          /* Título menor */
+        margin: 0; 
+      }
+      .brand div { 
+        font-size: 11px;          /* Subtítulo menor */
+      }
+      
+      /* Logo menor */
+      .logo { 
+        width: 40px; 
+        height: 40px; 
+      }
+      .logo small { 
+        font-size: 14px; 
+      }
+      
+      /* Navegação centralizada */
+      nav { 
+        flex-wrap: wrap; 
+        justify-content: center; 
+      }
+      
+      /* Título principal menor */
+      h1 { 
+        font-size: 24px; 
+        line-height: 1.3; 
+        margin-bottom: 8px; 
+      }
+      
+      /* Hero mais compacto */
+      .hero { 
+        gap: 16px; 
+        margin-top: 20px; 
+      }
+      .hero-left { 
+        text-align: center;       /* Centraliza conteúdo */
+      }
+      
+      /* Botões empilhados verticalmente */
+      .cta { 
+        flex-direction: column;   /* Botões um embaixo do outro */
+        gap: 8px; 
+        margin-top: 12px; 
+      }
+      .btn { 
+        width: 100%;              /* Botões ocupam largura total */
+        padding: 12px 16px; 
+      }
+      
+      /* Seções com menos espaço */
+      .projects { 
+        margin-top: 20px; 
+      }
+      .project { 
+        padding: 12px;            /* Menos padding nos cards */
+      }
+      
+      /* Metadados dos projetos empilhados */
+      .proj-meta { 
+        flex-direction: column; 
+        gap: 8px; 
+        align-items: flex-start; 
+      }
+      .proj-meta > div:last-child { 
+        align-self: stretch;      /* Tags ocupam largura total */
+      }
+      
+      /* Contato mais compacto */
+      .contact { 
+        margin-top: 24px; 
+      }
+      .contact form { 
+        max-width: 100%; 
+      }
+      
+      /* Cards menores */
+      .card { 
+        padding: 14px; 
+      }
     }
     
+    /* 
+      MOBILE MÉDIO (620px)
+      ===================
+      Grid vira 1 coluna, elementos ainda menores.
+      Remove alguns textos para economizar espaço.
+    */
     @media (max-width: 620px) {
-      .grid { grid-template-columns: 1fr; gap: 12px; }
-      .brand h2 { display: none; }
-      nav a { padding: 8px 10px; font-size: 13px; }
-      h1 { font-size: 20px; line-height: 1.3; text-align: center; }
-      .hero-left { text-align: center; padding: 0 8px; }
-      .hero-right { width: 100%; max-width: 100%; }
-      .social { font-size: 13px; }
-      .tag { font-size: 10px; padding: 3px 6px; }
+      /* Grade vira uma coluna só */
+      .grid { 
+        grid-template-columns: 1fr;  /* Uma coluna apenas */
+        gap: 12px; 
+      }
+      
+      /* Esconde título da marca para economizar espaço */
+      .brand h2 { 
+        display: none; 
+      }
+      
+      /* Links de navegação menores */
+      nav a { 
+        padding: 8px 10px; 
+        font-size: 13px; 
+      }
+      
+      /* Título ainda menor */
+      h1 { 
+        font-size: 20px; 
+        line-height: 1.3; 
+        text-align: center; 
+      }
+      
+      /* Hero centralizado com padding */
+      .hero-left { 
+        text-align: center; 
+        padding: 0 8px; 
+      }
+      
+      /* Card lateral ocupa tudo */
+      .hero-right { 
+        width: 100%; 
+        max-width: 100%; 
+      }
+      
+      /* Elementos menores */
+      .social { 
+        font-size: 13px; 
+      }
+      .tag { 
+        font-size: 10px; 
+        padding: 3px 6px; 
+      }
+      
+      /* Contato totalmente vertical */
       .contact { 
         flex-direction: column; 
         gap: 16px; 
@@ -271,33 +977,117 @@
       }
     }
     
+    /* 
+      MOBILE PEQUENO (480px)
+      =====================
+      Configurações extremas para telas muito pequenas.
+      Todos os elementos ficam mínimos mas ainda funcionais.
+    */
     @media (max-width: 480px) {
-      .container { padding: 8px; margin: 4px auto; }
-      header { padding: 8px 0; }
-      .brand h2 { font-size: 16px; }
-      .brand div { font-size: 10px; }
-      .logo { width: 36px; height: 36px; }
-      .logo small { font-size: 12px; }
-      h1 { font-size: 20px; line-height: 1.4; margin-bottom: 6px; }
-      .lead { font-size: 14px; margin-top: 8px; }
-      .hero { margin-top: 16px; gap: 12px; }
-      .cta { margin-top: 10px; gap: 6px; }
-      .btn { padding: 10px 14px; font-size: 14px; }
-      .card { padding: 12px; }
-      .project { padding: 10px; min-height: auto; }
-      .proj-thumb { height: 80px; font-size: 12px; }
-      nav { gap: 6px; }
-      nav a { padding: 6px 8px; font-size: 12px; }
-      .social { padding: 5px 8px; font-size: 12px; }
-      .social svg { width: 14px; height: 14px; }
-      .contact { margin-top: 20px; }
-      footer { margin-top: 24px; font-size: 12px; }
+      /* Container mínimo */
+      .container { 
+        padding: 8px; 
+        margin: 4px auto; 
+      }
+      
+      /* Header muito compacto */
+      header { 
+        padding: 8px 0; 
+      }
+      
+      /* Marca ainda menor */
+      .brand h2 { 
+        font-size: 16px; 
+      }
+      .brand div { 
+        font-size: 10px; 
+      }
+      
+      /* Logo mínimo */
+      .logo { 
+        width: 36px; 
+        height: 36px; 
+      }
+      .logo small { 
+        font-size: 12px; 
+      }
+      
+      /* Tipografia ajustada */
+      h1 { 
+        font-size: 20px; 
+        line-height: 1.4; 
+        margin-bottom: 6px; 
+      }
+      .lead { 
+        font-size: 14px; 
+        margin-top: 8px; 
+      }
+      
+      /* Seções mais compactas */
+      .hero { 
+        margin-top: 16px; 
+        gap: 12px; 
+      }
+      .cta { 
+        margin-top: 10px; 
+        gap: 6px; 
+      }
+      
+      /* Elementos menores */
+      .btn { 
+        padding: 10px 14px; 
+        font-size: 14px; 
+      }
+      .card { 
+        padding: 12px; 
+      }
+      .project { 
+        padding: 10px; 
+        min-height: auto;         /* Remove altura mínima */
+      }
+      .proj-thumb { 
+        height: 80px; 
+        font-size: 12px; 
+      }
+      
+      /* Navegação ultra compacta */
+      nav { 
+        gap: 6px; 
+      }
+      nav a { 
+        padding: 6px 8px; 
+        font-size: 12px; 
+      }
+      
+      /* Links sociais menores */
+      .social { 
+        padding: 5px 8px; 
+        font-size: 12px; 
+      }
+      .social svg { 
+        width: 14px; 
+        height: 14px; 
+      }
+      
+      /* Espaçamentos finais */
+      .contact { 
+        margin-top: 20px; 
+      }
+      footer { 
+        margin-top: 24px; 
+        font-size: 12px; 
+      }
     }
     
-    /* Melhorias adicionais para touch devices */
+    /* 
+      MELHORIAS PARA DISPOSITIVOS TOUCH
+      =================================
+      Garante que botões tenham tamanho mínimo para toque.
+      Aplica-se a dispositivos sem hover (touch screens).
+    */
     @media (hover: none) and (pointer: coarse) {
       .btn, .social, nav a { 
-        min-height: 44px; 
+        min-height: 44px;         /* Altura mínima para toque confortável */
         display: flex; 
         align-items: center; 
         justify-content: center; 
@@ -627,10 +1417,29 @@
   </div>
 
   <script>
+    /* 
+      ==========================================
+      JAVASCRIPT - FUNCIONALIDADES INTERATIVAS
+      ==========================================
+      Este script adiciona todas as interações dinâmicas do site.
+      Uso JavaScript vanilla (sem bibliotecas) para melhor performance.
+    */
+    
+    /* 
+      ATUALIZAÇÃO AUTOMÁTICA DO ANO
+      ============================
+      Atualiza automaticamente o ano no rodapé.
+    */
     document.getElementById('y').textContent = new Date().getFullYear();
     
-    // Função melhorada para abrir links com animação
+    /* 
+      FUNÇÃO PARA ABRIR LINKS COM ANIMAÇÃO
+      ====================================
+      Abre links externos com feedback visual e validação.
+      Inclui animação de loading no botão clicado.
+    */
     function openLink(u) { 
+      // Valida se é um link de demonstração
       if(u === '#') { 
         showNotification('Substitua o link de demo pelo URL do seu projeto.', 'warning'); 
         return;
@@ -651,7 +1460,12 @@
       }, 200);
     }
 
-    // Função melhorada para enviar formulário
+    /* 
+      FUNÇÃO PARA ENVIO DE FORMULÁRIO
+      ===============================
+      Processa formulário de contato com animações e prepara email.
+      Usa mailto: para abrir cliente de email do usuário.
+    */
     function sendForm(e){
       e.preventDefault();
       const submitBtn = e.target.querySelector('button[type="submit"]');
@@ -662,17 +1476,19 @@
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
       
+      // Coleta dados do formulário
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const message = document.getElementById('message').value;
       
       // Simula delay de envio para mostrar animação
       setTimeout(() => {
+        // Prepara email com dados do formulário
         const subject = encodeURIComponent('Contato pelo portfólio: ' + name);
         const body = encodeURIComponent('Nome: ' + name + '\nEmail: ' + email + '\n\n' + message);
         window.location.href = `mailto:alangodois1@gmail.com?subject=${subject}&body=${body}`;
         
-        // Restaura o botão
+        // Restaura o botão após processamento
         setTimeout(() => {
           submitBtn.textContent = originalText;
           submitBtn.classList.remove('loading');
@@ -682,20 +1498,34 @@
       }, 800);
     }
     
-    // Sistema de notificações
+    /* 
+      SISTEMA DE NOTIFICAÇÕES
+      =======================
+      Cria notificações temporárias no canto superior direito.
+      Suporte a diferentes tipos: success, warning, info.
+    */
     function showNotification(message, type = 'info') {
       const notification = document.createElement('div');
+      
+      // Define cores baseadas no tipo
+      const colors = {
+        success: '#10b981',  // Verde
+        warning: '#f59e0b',  // Amarelo  
+        info: '#3b82f6'      // Azul
+      };
+      
+      // Estiliza a notificação
       notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: ${type === 'success' ? '#10b981' : type === 'warning' ? '#f59e0b' : '#3b82f6'};
+        background: ${colors[type]};
         color: white;
         padding: 12px 20px;
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         z-index: 10000;
-        transform: translateX(100%);
+        transform: translateX(100%);   /* Começa fora da tela */
         transition: transform 0.3s ease;
         max-width: 300px;
         font-size: 14px;
@@ -703,7 +1533,7 @@
       notification.textContent = message;
       document.body.appendChild(notification);
       
-      // Anima entrada
+      // Anima entrada (desliza da direita)
       setTimeout(() => {
         notification.style.transform = 'translateX(0)';
       }, 100);
@@ -717,13 +1547,19 @@
       }, 4000);
     }
     
-    // Scroll suave melhorado
+    /* 
+      SCROLL SUAVE ENTRE SEÇÕES
+      ========================
+      Navega suavemente entre seções com efeito de destaque.
+      Calcula offset para compensar header fixo.
+    */
     function smoothScrollTo(elementId) {
       const element = document.getElementById(elementId);
       if (element) {
-        const offset = 80; // Offset para header fixo
+        const offset = 80; // Compensa altura do header
         const elementPosition = element.offsetTop - offset;
         
+        // Scroll suave nativo do navegador
         window.scrollTo({
           top: elementPosition,
           behavior: 'smooth'
@@ -731,14 +1567,19 @@
         
         // Adiciona efeito de destaque no elemento de destino
         element.style.transition = 'all 0.3s ease';
-        element.style.transform = 'scale(1.02)';
+        element.style.transform = 'scale(1.02)';  // Aumenta levemente
         setTimeout(() => {
-          element.style.transform = 'scale(1)';
+          element.style.transform = 'scale(1)';   // Volta ao normal
         }, 600);
       }
     }
     
-    // Funções do menu mobile melhoradas
+    /* 
+      CONTROLE DO MENU MOBILE
+      =======================
+      Abre/fecha menu lateral em dispositivos móveis.
+      Inclui controle de scroll e acessibilidade.
+    */
     function toggleMobileMenu() {
       const nav = document.getElementById('mobile-nav');
       const overlay = document.querySelector('.mobile-overlay');
@@ -747,6 +1588,7 @@
       
       console.log('toggleMobileMenu chamado'); // Debug
       
+      // Verifica se elementos existem
       if (!nav || !overlay || !btn) {
         console.error('Elementos não encontrados:', { nav, overlay, btn });
         return;
@@ -759,21 +1601,26 @@
         console.log('Fechando menu');
         nav.classList.remove('active');
         overlay.classList.remove('active');
-        btn.style.transform = 'rotate(0deg)';
-        body.style.overflow = '';
+        btn.style.transform = 'rotate(0deg)';     // Volta ícone ao normal
+        body.style.overflow = '';                 // Restaura scroll
         body.style.position = '';
       } else {
         // Abrir menu
         console.log('Abrindo menu');
         nav.classList.add('active');
         overlay.classList.add('active');
-        btn.style.transform = 'rotate(180deg)';
-        body.style.overflow = 'hidden';
+        btn.style.transform = 'rotate(180deg)';   // Rotaciona ícone
+        body.style.overflow = 'hidden';           // Bloqueia scroll
         body.style.position = 'fixed';
         body.style.width = '100%';
       }
     }
     
+    /* 
+      FUNÇÃO PARA FECHAR MENU MOBILE
+      ==============================
+      Força fechamento do menu e restaura estado da página.
+    */
     function closeMobileMenu() {
       const nav = document.getElementById('mobile-nav');
       const overlay = document.querySelector('.mobile-overlay');
@@ -784,6 +1631,7 @@
       
       if (!nav || !overlay || !btn) return;
       
+      // Restaura estado normal
       nav.classList.remove('active');
       overlay.classList.remove('active');
       btn.style.transform = 'rotate(0deg)';
@@ -792,21 +1640,27 @@
       body.style.width = '';
     }
     
-    // Fechar menu ao redimensionar a tela
+    /* 
+      EVENT LISTENERS - CONTROLES AUTOMÁTICOS
+      =======================================
+      Configura comportamentos automáticos do menu mobile.
+    */
+    
+    // Fechar menu ao redimensionar tela (volta para desktop)
     window.addEventListener('resize', function() {
       if (window.innerWidth > 768) {
         closeMobileMenu();
       }
     });
     
-    // Fechar menu com ESC
+    // Fechar menu com tecla ESC (acessibilidade)
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         closeMobileMenu();
       }
     });
     
-    // Prevenir scroll quando menu estiver aberto
+    // Prevenir scroll quando menu estiver aberto (mobile)
     document.addEventListener('touchmove', function(e) {
       const nav = document.getElementById('mobile-nav');
       if (nav && nav.classList.contains('active')) {
@@ -816,14 +1670,20 @@
       }
     }, { passive: false });
     
-    // Animações de entrada na carga da página
+    /* 
+      ANIMAÇÕES DE ENTRADA NA CARGA
+      =============================
+      Anima elementos principais quando a página carrega.
+      Cria efeito de entrada escalonado para cada seção.
+    */
     window.addEventListener('load', function() {
-      // Anima elementos principais
+      // Seleciona elementos principais
       const header = document.querySelector('header');
       const heroLeft = document.querySelector('.hero-left');
       const heroRight = document.querySelector('.hero-right');
       const projects = document.querySelectorAll('.project');
       
+      // Anima header (desce de cima)
       if (header) {
         header.style.opacity = '0';
         header.style.transform = 'translateY(-20px)';
@@ -834,6 +1694,7 @@
         }, 100);
       }
       
+      // Anima hero esquerda (vem da esquerda)
       if (heroLeft) {
         heroLeft.style.opacity = '0';
         heroLeft.style.transform = 'translateX(-30px)';
@@ -844,6 +1705,7 @@
         }, 300);
       }
       
+      // Anima hero direita (vem da direita)
       if (heroRight) {
         heroRight.style.opacity = '0';
         heroRight.style.transform = 'translateX(30px)';
@@ -854,7 +1716,7 @@
         }, 500);
       }
       
-      // Anima projetos com delay escalonado
+      // Anima projetos com delay escalonado (cada um após o outro)
       projects.forEach((project, index) => {
         project.style.opacity = '0';
         project.style.transform = 'translateY(30px)';
@@ -862,16 +1724,22 @@
         setTimeout(() => {
           project.style.opacity = '1';
           project.style.transform = 'translateY(0)';
-        }, 700 + (index * 100));
+        }, 700 + (index * 100)); // Delay crescente para cada projeto
       });
     });
     
-    // Intersection Observer para animações de scroll
+    /* 
+      INTERSECTION OBSERVER - ANIMAÇÕES DE SCROLL
+      ===========================================
+      Detecta quando elementos entram na tela e os anima.
+      Usa API moderna do navegador para performance otimizada.
+    */
     const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.1,              // Ativa quando 10% do elemento está visível
+      rootMargin: '0px 0px -50px 0px' // Margem para ativar antes do elemento aparecer totalmente
     };
     
+    // Cria observer que anima elementos ao entrar na tela
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -880,12 +1748,16 @@
       });
     }, observerOptions);
     
-    // Observa elementos para animação
+    /* 
+      INICIALIZAÇÃO DAS ANIMAÇÕES DE SCROLL
+      ====================================
+      Prepara elementos para serem animados quando ficarem visíveis.
+    */
     document.addEventListener('DOMContentLoaded', () => {
       const elementsToAnimate = document.querySelectorAll('.contact, footer');
       elementsToAnimate.forEach(el => {
-        el.style.opacity = '0';
-        observer.observe(el);
+        el.style.opacity = '0';    // Começa invisível
+        observer.observe(el);      // Observa para animar quando aparecer
       });
     });
   </script>
