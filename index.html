@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=yes, minimum-scale=1, maximum-scale=5" />
+  <meta name="theme-color" content="#0f1724" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Kyouz</title>
+  <meta name="description" content="Portfólio de projetos de Alan Godois. Contato: email, Instagram, LinkedIn e GitHub." />
+  <!-- Favicon - ícone na aba do navegador -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <!-- ou use um emoji como favicon temporário -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#7c3aed; --glass: rgba(255,255,255,0.08);
+      --radius:14px; --gap:20px; --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,system-ui,-apple-system; background:var(--bg);color:#e6eef8;-webkit-font-smoothing:antialiased}
+    .container{max-width:var(--maxw);margin:32px auto;padding:24px;background:var(--bg);position:relative;z-index:1}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo-link{text-decoration:none;display:block;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
+    .logo-link:hover{transform:scale(1.05) rotate(5deg)}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 6px 18px rgba(124,58,237,0.18);cursor:pointer;overflow:hidden;position:relative;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
+    .logo:hover{box-shadow:0 8px 25px rgba(124,58,237,0.4);background:linear-gradient(135deg,#8b5cf6,#06b6d4)}
+    .logo img{width:100%;height:100%;object-fit:cover;border-radius:12px;position:absolute;top:0;left:0}
+    .logo small{font-size:18px;color:#fff;z-index:1}
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative}
+    nav a:hover{background:var(--glass);color:#fff;transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,58,237,0.2)}
+    nav a:active{transform:translateY(0);transition:all 0.1s ease}
+    
+    /* Mobile menu */
+    .mobile-menu-btn{display:none;background:none;border:none;color:var(--muted);cursor:pointer;padding:8px;transition:all 0.3s ease}
+    .mobile-menu-btn:hover{color:#fff;transform:scale(1.1)}
+    .mobile-menu-btn svg{width:24px;height:24px;transition:transform 0.3s ease}
+    
+    @media (max-width: 768px) {
+      .mobile-menu-btn{display:block}
+      nav{position:fixed;top:0;right:-100%;width:250px;height:100vh;background:var(--card);backdrop-filter:blur(10px);flex-direction:column;justify-content:flex-start;padding:80px 20px 20px;transition:right 0.3s ease;z-index:1000;border-left:1px solid rgba(255,255,255,0.1)}
+      nav.active{right:0}
+      nav a{width:100%;text-align:center;padding:12px;margin:4px 0}
+      .mobile-overlay{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:999}
+      .mobile-overlay.active{display:block}
+    }
+
+    .hero{display:flex;gap:28px;align-items:center;margin-top:28px}
+    .hero-left{flex:1}
+    h1{margin:0;font-size:32px;line-height:1.05}
+    p.lead{color:var(--muted);margin-top:12px}
+    .cta{display:flex;gap:12px;margin-top:18px}
+    .btn{background:var(--accent);border:none;padding:10px 16px;border-radius:10px;color:#fff;cursor:pointer;font-weight:600;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden;transform:translateY(0)}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(124,58,237,0.4);background:linear-gradient(135deg,var(--accent),#8b5cf6)}
+    .btn:active{transform:translateY(-1px);transition:all 0.1s ease}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
+    .btn.ghost:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3);transform:translateY(-2px);box-shadow:0 4px 15px rgba(255,255,255,0.1)}
+
+    .hero-right{width:360px}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 8px 24px rgba(2,6,23,0.6);word-wrap:break-word;}
+
+    .projects{margin-top:28px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+    .project{background:var(--card);padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:12px;min-height:170px;word-wrap:break-word;overflow-wrap:break-word;position:relative;z-index:1;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);border:1px solid transparent}
+    .project:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(0,0,0,0.4);border-color:rgba(124,58,237,0.3);background:linear-gradient(135deg,var(--card),rgba(124,58,237,0.05))}
+    .proj-thumb{height:110px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--muted);font-size:14px;text-align:center;padding:8px;transition:all 0.3s ease}
+    .project:hover .proj-thumb{background:rgba(124,58,237,0.2);color:#fff}
+    .proj-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,0.08);color:var(--muted);white-space:nowrap}
+
+    .contact{margin-top:32px;display:flex;gap:20px;align-items:center;justify-content:space-between}
+    .contact .links{display:flex;gap:12px}
+    .social{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.08);color:var(--muted);text-decoration:none;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden}
+    .social:hover{background:rgba(255,255,255,0.15);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,255,255,0.1)}
+    .social:active{transform:translateY(-1px);transition:all 0.1s ease}
+    .social svg{width:18px;height:18px;transition:transform 0.3s ease}
+    .social:hover svg{transform:scale(1.1)}
+
+    footer{margin-top:40px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* responsive */
+    @media (max-width: 1200px) {
+      .container { max-width: 95%; padding: 20px; }
+    }
+    
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { flex-direction: column; gap: 24px; }
+      .hero-right { width: 100%; max-width: 500px; }
+      .contact { flex-direction: column; gap: 24px; align-items: stretch; }
+      .contact > div:last-child { width: 100%; max-width: 500px; }
+    }
+    
+    @media (max-width: 768px) {
+      .container { padding: 16px; margin: 16px auto; }
+      header { flex-direction: column; gap: 16px; text-align: center; }
+      .brand { justify-content: center; }
+      nav { flex-wrap: wrap; justify-content: center; }
+      h1 { font-size: 28px; }
+      .hero { gap: 20px; }
+      .cta { flex-direction: column; gap: 10px; }
+      .btn { width: 100%; padding: 12px 16px; }
+      .projects { margin-top: 24px; }
+      .project { padding: 16px; }
+      .proj-meta { flex-direction: column; gap: 12px; align-items: flex-start; }
+      .proj-meta > div:last-child { align-self: stretch; }
+      .contact form { max-width: 100%; }
+    }
+    
+    @media (max-width: 620px) {
+      .grid { grid-template-columns: 1fr; }
+      .brand h2 { display: none; }
+      nav a { padding: 10px 12px; font-size: 14px; }
+      h1 { font-size: 24px; line-height: 1.2; }
+      .hero-left { text-align: center; }
+      .social { font-size: 14px; }
+      .tag { font-size: 11px; }
+    }
+    
+    @media (max-width: 480px) {
+      .container { padding: 12px; margin: 8px auto; }
+      .logo { width: 48px; height: 48px; }
+      .logo small { font-size: 16px; }
+      h1 { font-size: 22px; }
+      .card { padding: 16px; }
+      .project { padding: 14px; min-height: auto; }
+      .proj-thumb { height: 90px; font-size: 14px; }
+      nav { gap: 8px; }
+      nav a { padding: 8px 10px; font-size: 13px; }
+      .social { padding: 6px 10px; font-size: 13px; }
+      .social svg { width: 16px; height: 16px; }
+    }
+    
+    /* Melhorias adicionais para touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      .btn, .social, nav a { 
+        min-height: 44px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+      }
+      .social { min-height: 40px; }
+    }
+
+    /* Animações de entrada */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .animate-fade-left {
+      animation: fadeInLeft 0.6s ease-out forwards;
+    }
+
+    .animate-fade-right {
+      animation: fadeInRight 0.6s ease-out forwards;
+    }
+
+    .animate-pulse {
+      animation: pulse 2s infinite;
+    }
+
+    /* Loading state */
+    .loading {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(124,58,237,0.4), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+      100% {
+        left: 100%;
+      }
+    }
+
+    /* small util */
+    .center{display:flex;align-items:center;justify-content:center}
+    input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:var(--card);color:inherit;font-family:inherit;font-size:14px;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
+    input:hover,textarea:hover{border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.05)}
+    input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,0.2);background:rgba(124,58,237,0.08);transform:translateY(-1px)}
+    textarea{resize:vertical;min-height:100px}
+    
+    /* Form improvements for mobile */
+    @media (max-width: 768px) {
+      input,textarea{padding:12px;font-size:16px} /* Prevents zoom on iOS */
+      textarea{min-height:120px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <a href="http://100.105.234.44:81/#/login" target="_blank" rel="noopener" class="logo-link">
+          <div class="logo">
+            <!-- Substitua 'logo.png' pelo caminho da sua logo -->
+            <img src="logo.png" alt="Logo Kyouz" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <small style="display:none;">AG</small>
+          </div>
+        </a>
+        <div>
+          <h2 style="margin:0">Kyouz</h2>
+          <div style="font-size:13px;color:var(--muted)">Desenvolvedor • Projetos & Portfólio</div>
+        </div>
+      </div>
+      
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      
+      <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
+      
+      <nav id="mobile-nav">
+        <a href="#projetos" onclick="closeMobileMenu(); smoothScrollTo('projetos'); return false;">Projetos</a>
+        <a href="#contato" onclick="closeMobileMenu(); smoothScrollTo('contato'); return false;">Contato</a>
+        <a href="#sobre" onclick="closeMobileMenu(); smoothScrollTo('sobre'); return false;">Sobre</a>
+        <!--<a href="#" class="btn">Baixar CV</a>-->
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-left">
+          <h1>Olá! Eu me chamo <strong>Alan</strong>. Apenas vivendo e procurando uma ideia de desenvolvimento.
+          </h1>
+          <p class="lead">Aqui estão alguns dos meus trabalhos. Passe o mouse nos projetos para ver links diretos, ou entre em contato para colaborar.</p>
+          <div class="cta">
+            <button class="btn" onclick="smoothScrollTo('contato')">Me contactar</button>
+            <button class="btn ghost" onclick="smoothScrollTo('projetos')">Ver projetos</button>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="card">
+            <h3 style="margin:0 0 8px 0">Contato rápido</h3>
+            <p style="margin:0 0 12px 0;color:var(--muted)">Envie uma mensagem por email ou encontre-me nas redes.</p>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <a class="social" href="mailto:alangodois1@gmail.com"> <!-- customize -->
+                <!-- mail icon -->
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L12 13l9-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                alangodois1@gmail.com
+              </a>
+              <div style="display:flex;gap:8px">
+                <a class="social" href="https://instagram.com/alan_godois" target="_blank" rel="noopener"> 
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.4"/><path d="M16 11.37a4 4 0 1 1-7.999.001A4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Instagram
+                </a>
+                <a class="social" href="https://linkedin.com/in/alan-godois-72b462187" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="3" width="20" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M8 11v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 7v1M12 11v6M16 11v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                  LinkedIn
+                </a>
+              </div>
+              <a class="social" href="https://github.com/Kyouz2148" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 .5C5.73.5.99 5.24.99 11.5c0 4.66 3.02 8.61 7.21 10.01.53.1.73-.23.73-.51 0-.25-.01-.92-.01-1.8-2.93.64-3.55-1.41-3.55-1.41-.48-1.23-1.17-1.56-1.17-1.56-.96-.66.07-.65.07-.65 1.06.07 1.62 1.09 1.62 1.09.94 1.61 2.47 1.15 3.07.88.09-.69.37-1.15.67-1.41-2.34-.27-4.8-1.17-4.8-5.2 0-1.15.41-2.09 1.09-2.83-.11-.27-.47-1.35.1-2.82 0 0 .89-.29 2.9 1.08a10.06 10.06 0 0 1 2.64-.36c.9.01 1.81.12 2.65.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.47.21 2.55.1 2.82.68.74 1.09 1.68 1.09 2.83 0 4.04-2.47 4.92-4.82 5.18.38.33.72.98.72 1.98 0 1.43-.01 2.58-.01 2.93 0 .28.2.61.74.5C20.98 20.11 24 16.16 24 11.5 24 5.24 18.27.5 12 .5z" stroke="currentColor" stroke-width="0.4"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projetos" class="projects">
+        <h3 style="margin:0 0 12px 0">Projetos disponíveis</h3>
+        <div class="grid">
+
+          <article class="project">
+            <div class="proj-thumb">Conversor</div>
+            <div style="flex:1">
+              <h4 style="margin:0">Conversor de Imagens e Audios</h4>
+              <p style="margin:6px 0 0;color:var(--muted);font-size:13px">Um aplicativo Python completo para conversão de arquivos de áudio e imagem com interface gráfica intuitiva.</p>
+            </div>
+            <div class="proj-meta">
+              <div class="tags"><span class="tag">Python</span><span class="tag">PyQt5</span></div>
+              <div style="display:flex;gap:8px">
+                <a class="social" href="#" onclick="openLink('https://github.com/Kyouz2148/Conversor.git')">Código</a>
+                <!--<a class="social" href="#" onclick="openLink('#')">Demo</a>-->
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="proj-thumb">Pixel Task</div>
+            <div style="flex:1">
+              <h4 style="margin:0">App de Tarefas</h4>
+              <p style="margin:6px 0 0;color:var(--muted);font-size:13px">Pixel Task é um gerenciador de tarefas gamificado desenvolvido em Python com PyQt5. O aplicativo combina produtividade com elementos de jogos, apresentando avatares em pixel art gerados proceduralmente e um sistema de XP e níveis.</p>
+            </div>
+            <div class="proj-meta">
+              <div class="tags"><span class="tag">Python</span><span class="tag">PyQt5</span></div>
+              <div style="display:flex;gap:8px">
+                <a class="social" href="#" onclick="openLink('https://github.com/Kyouz2148/pixel-task.git')">Código</a>
+                <!--<a class="social" href="#" onclick="openLink('#')">Demo</a>-->
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="proj-thumb">WSA APK Installer</div>
+            <div style="flex:1">
+              <h4 style="margin:0">Aplicativo Desktop para Windows</h4>
+              <p style="margin:6px 0 0;color:var(--muted);font-size:13px">Instalador de APKs nativo para Windows - Aplicativo desktop desenvolvido com Electron que permite instalar aplicativos Android (.APK) no Windows Subsystem for Android (WSA) de forma simples e intuitiva.</p>
+            </div>
+            <div class="proj-meta">
+              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+              <div style="display:flex;gap:8px">
+                <a class="social" href="#" onclick="openLink('https://github.com/Kyouz2148/Instalador-de-APK-para-Windows-com-WSA.git')">Código</a>
+                <!--<a class="social" href="#" onclick="openLink('#')">Demo</a>-->
+              </div>
+            </div>
+          </article>
+
+          <!-- exemplos extras -->
+          <article class="project">
+            <div class="proj-thumb">Controle Financeiro Pessoal</div>
+            <div style="flex:1">
+              <h4 style="margin:0">Um aplicativo web moderno e responsivo para controle de receitas e despesas pessoais</h4>
+              <p style="margin:6px 0 0;color:var(--muted);font-size:13px">
+✅ Receitas e Despesas: Cadastre e gerencie suas transações.<br>
+✅ Gráficos Interativos: Visualize seus dados por categoria, mês ou ano.<br>
+✅ Filtros Avançados: Busque por descrição, tipo, categoria, valor e período.<br>
+✅ Tema Claro/Escuro: Interface personalizável.<br>
+✅ Responsivo: Funciona perfeitamente em mobile e desktop.<br>
+✅ PWA: Pode ser instalado como aplicativo.</p>
+            </div>
+            <div class="proj-meta">
+              <div class="tags"><span class="tag">JavaScript</span><span class="tag">CSS3</span></div>
+              <div style="display:flex;gap:8px">
+                <a class="social" href="#" onclick="openLink('https://github.com/Kyouz2148/controle-financeiro.git')">Código</a>
+                <a class="social" href="#" onclick="openLink('https://kyouz2148.github.io/controle-financeiro')">Demo</a>
+              </div>
+            </div>
+          </article>
+
+          <!--<article class="project">
+            <div class="proj-thumb">Projeto 5</div>
+            <div style="flex:1">
+              <h4 style="margin:0">Gerenciador Financeiro</h4>
+              <p style="margin:6px 0 0;color:var(--muted);font-size:13px">App desktop para controle de despesas e receitas.</p>
+            </div>
+            <div class="proj-meta">
+              <div class="tags"><span class="tag">Electron</span><span class="tag">SQLite</span></div>
+              <div style="display:flex;gap:8px">
+                <a class="social" href="#" onclick="openLink('https://github.com/seuusuario/projeto5')">Código</a>
+                <a class="social" href="#" onclick="openLink('#')">Demo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="proj-thumb">Projeto 6</div>
+            <div style="flex:1">
+              <h4 style="margin:0">Gerador de QR / Código de Barras</h4>
+              <p style="margin:6px 0 0;color:var(--muted);font-size:13px">Ferramenta para gerar imagens e exportar para PNG/PDF.</p>
+            </div>
+            <div class="proj-meta">
+              <div class="tags"><span class="tag">Python</span><span class="tag">Pillow</span></div>
+              <div style="display:flex;gap:8px">
+                <a class="social" href="#" onclick="openLink('https://github.com/seuusuario/projeto6')">Código</a>
+                <a class="social" href="#" onclick="openLink('#')">Demo</a>
+              </div>
+            </div>
+          </article>-->
+
+        </div>
+      </section>
+
+      <section id="contato" class="contact">
+        <div style="flex:1">
+          <h3 id="sobre">Fale comigo</h3>
+          <p style="margin:6px 0 12px 0;color:var(--muted)">Prefere email? Mensagem direta? Escolha uma opção ou preencha o formulário abaixo.</p>
+
+          <form onsubmit="sendForm(event)" style="display:grid;gap:10px;max-width:560px">
+            <input id="name" placeholder="Seu nome" required />
+            <input id="email" placeholder="Seu email" type="email" required />
+            <textarea id="message" rows="4" placeholder="Como posso ajudar?" required></textarea>
+            <div style="display:flex;gap:8px">
+              <button class="btn" type="submit">Enviar mensagem</button>
+              <button type="button" class="btn ghost" onclick="window.location.href='mailto:seuemail@exemplo.com'">Enviar por email</button>
+            </div>
+          </form>
+        </div>
+
+        <div style="width:320px">
+          <div class="card">
+            <h4 style="margin:0 0 8px 0">Minhas redes</h4>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+              <a class="social" href="mailto:alangodois1@gmail.com">📧 alangodois1@gmail.com</a>
+              <a class="social" href="https://instagram.com/alan_godois" target="_blank">📷 Instagram</a>
+              <a class="social" href="https://linkedin.com/in/alan-godois-72b462187" target="_blank">💼 LinkedIn</a>
+              <a class="social" href="https://github.com/Kyouz2148" target="_blank">🐙 GitHub</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div>Fim, mas só por enquanto. Amanhã tem mais! — © <span id="y"></span></div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    
+    // Função melhorada para abrir links com animação
+    function openLink(u) { 
+      if(u === '#') { 
+        showNotification('Substitua o link de demo pelo URL do seu projeto.', 'warning'); 
+        return;
+      } 
+      
+      // Adiciona efeito de loading no botão clicado
+      const clickedElement = event.target.closest('.social');
+      if (clickedElement) {
+        clickedElement.classList.add('loading');
+        setTimeout(() => {
+          clickedElement.classList.remove('loading');
+        }, 800);
+      }
+      
+      // Abre o link após um pequeno delay para mostrar a animação
+      setTimeout(() => {
+        window.open(u, '_blank');
+      }, 200);
+    }
+
+    // Função melhorada para enviar formulário
+    function sendForm(e){
+      e.preventDefault();
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      
+      // Animação de envio
+      submitBtn.textContent = 'Enviando...';
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      
+      // Simula delay de envio para mostrar animação
+      setTimeout(() => {
+        const subject = encodeURIComponent('Contato pelo portfólio: ' + name);
+        const body = encodeURIComponent('Nome: ' + name + '\nEmail: ' + email + '\n\n' + message);
+        window.location.href = `mailto:alangodois1@gmail.com?subject=${subject}&body=${body}`;
+        
+        // Restaura o botão
+        setTimeout(() => {
+          submitBtn.textContent = originalText;
+          submitBtn.classList.remove('loading');
+          submitBtn.disabled = false;
+          showNotification('Formulário preparado! Seu cliente de email será aberto.', 'success');
+        }, 1000);
+      }, 800);
+    }
+    
+    // Sistema de notificações
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#10b981' : type === 'warning' ? '#f59e0b' : '#3b82f6'};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 10000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        max-width: 300px;
+        font-size: 14px;
+      `;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      // Anima entrada
+      setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+      }, 100);
+      
+      // Remove após 4 segundos
+      setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 4000);
+    }
+    
+    // Scroll suave melhorado
+    function smoothScrollTo(elementId) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        const offset = 80; // Offset para header fixo
+        const elementPosition = element.offsetTop - offset;
+        
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+        
+        // Adiciona efeito de destaque no elemento de destino
+        element.style.transition = 'all 0.3s ease';
+        element.style.transform = 'scale(1.02)';
+        setTimeout(() => {
+          element.style.transform = 'scale(1)';
+        }, 600);
+      }
+    }
+    
+    // Funções do menu mobile melhoradas
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mobile-nav');
+      const overlay = document.querySelector('.mobile-overlay');
+      const btn = document.querySelector('.mobile-menu-btn');
+      
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+      
+      // Animação do botão do menu
+      if (nav.classList.contains('active')) {
+        btn.style.transform = 'rotate(180deg)';
+      } else {
+        btn.style.transform = 'rotate(0deg)';
+      }
+    }
+    
+    function closeMobileMenu() {
+      const nav = document.getElementById('mobile-nav');
+      const overlay = document.querySelector('.mobile-overlay');
+      const btn = document.querySelector('.mobile-menu-btn');
+      
+      nav.classList.remove('active');
+      overlay.classList.remove('active');
+      btn.style.transform = 'rotate(0deg)';
+    }
+    
+    // Fechar menu ao redimensionar a tela
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        closeMobileMenu();
+      }
+    });
+    
+    // Animações de entrada na carga da página
+    window.addEventListener('load', function() {
+      // Anima elementos principais
+      const header = document.querySelector('header');
+      const heroLeft = document.querySelector('.hero-left');
+      const heroRight = document.querySelector('.hero-right');
+      const projects = document.querySelectorAll('.project');
+      
+      if (header) {
+        header.style.opacity = '0';
+        header.style.transform = 'translateY(-20px)';
+        header.style.transition = 'all 0.6s ease';
+        setTimeout(() => {
+          header.style.opacity = '1';
+          header.style.transform = 'translateY(0)';
+        }, 100);
+      }
+      
+      if (heroLeft) {
+        heroLeft.style.opacity = '0';
+        heroLeft.style.transform = 'translateX(-30px)';
+        heroLeft.style.transition = 'all 0.6s ease';
+        setTimeout(() => {
+          heroLeft.style.opacity = '1';
+          heroLeft.style.transform = 'translateX(0)';
+        }, 300);
+      }
+      
+      if (heroRight) {
+        heroRight.style.opacity = '0';
+        heroRight.style.transform = 'translateX(30px)';
+        heroRight.style.transition = 'all 0.6s ease';
+        setTimeout(() => {
+          heroRight.style.opacity = '1';
+          heroRight.style.transform = 'translateX(0)';
+        }, 500);
+      }
+      
+      // Anima projetos com delay escalonado
+      projects.forEach((project, index) => {
+        project.style.opacity = '0';
+        project.style.transform = 'translateY(30px)';
+        project.style.transition = 'all 0.6s ease';
+        setTimeout(() => {
+          project.style.opacity = '1';
+          project.style.transform = 'translateY(0)';
+        }, 700 + (index * 100));
+      });
+    });
+    
+    // Intersection Observer para animações de scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+        }
+      });
+    }, observerOptions);
+    
+    // Observa elementos para animação
+    document.addEventListener('DOMContentLoaded', () => {
+      const elementsToAnimate = document.querySelectorAll('.contact, footer');
+      elementsToAnimate.forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
