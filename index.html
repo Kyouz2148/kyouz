@@ -44,81 +44,122 @@
     .mobile-menu-btn:hover{color:#fff;transform:scale(1.1)}
     .mobile-menu-btn svg{width:24px;height:24px;transition:transform 0.3s ease}
     
-    /* Menu mobile escondido por padrão */
+    /* Menu mobile - escondido por padrão */
     nav{display:flex;gap:12px;align-items:center}
-    .mobile-overlay{display:none}
+    .mobile-overlay{display:none !important}
+    
+    /* Menu desktop normal */
+    @media (min-width: 769px) {
+      .mobile-overlay{display:none !important}
+      .mobile-menu-btn{display:none !important}
+      nav{display:flex !important;position:static !important;width:auto !important;height:auto !important;background:transparent !important;flex-direction:row !important;padding:0 !important;box-shadow:none !important;border:none !important}
+      nav a{background:transparent !important;border:none !important;padding:8px 12px !important;margin:0 !important;gap:0 !important}
+    }
     
     @media (max-width: 768px) {
       .mobile-menu-btn{display:block}
       
-      /* Menu mobile - inicialmente escondido */
+      /* Menu mobile - overlay completo */
       nav{
-        position:fixed;
-        top:0;
-        right:-100%;
-        width:280px;
-        height:100vh;
-        background:var(--card);
-        backdrop-filter:blur(20px);
-        flex-direction:column;
-        justify-content:flex-start;
-        align-items:stretch;
-        padding:80px 30px 30px;
-        transition:right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index:1000;
-        border-left:1px solid rgba(255,255,255,0.1);
-        box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        width: 320px !important;
+        height: 100vh !important;
+        background: var(--card) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        padding: 100px 40px 40px !important;
+        transition: right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        z-index: 1000 !important;
+        border-left: 2px solid rgba(124,58,237,0.3) !important;
+        box-shadow: -20px 0 40px rgba(0,0,0,0.5) !important;
+        gap: 0 !important;
       }
       
-      /* Menu mobile ativo */
-      nav.active{right:0}
+      /* Menu mobile ativo - visível */
+      nav.active{
+        right: 0 !important;
+        transform: translateX(0) !important;
+      }
       
-      /* Links do menu mobile */
+      /* Links do menu mobile - bem visíveis */
       nav a{
-        width:100%;
-        text-align:left;
-        padding:15px 20px;
-        margin:5px 0;
-        border-radius:12px;
-        font-size:16px;
-        font-weight:500;
-        transition: all 0.3s ease;
-        border: 1px solid transparent;
+        width: 100% !important;
+        text-align: left !important;
+        padding: 20px 25px !important;
+        margin: 8px 0 !important;
+        border-radius: 15px !important;
+        font-size: 18px !important;
+        font-weight: 600 !important;
+        color: #fff !important;
+        background: rgba(255,255,255,0.05) !important;
+        border: 2px solid rgba(255,255,255,0.1) !important;
+        transition: all 0.3s ease !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
       }
       
       nav a:hover {
-        background: rgba(124,58,237,0.15);
-        border-color: rgba(124,58,237,0.3);
-        transform: translateX(5px);
+        background: rgba(124,58,237,0.3) !important;
+        border-color: rgba(124,58,237,0.6) !important;
+        color: #fff !important;
+        transform: translateX(10px) scale(1.02) !important;
+        box-shadow: 0 5px 15px rgba(124,58,237,0.4) !important;
       }
       
-      /* Overlay escuro */
+      /* Overlay escuro - bem visível */
       .mobile-overlay{
-        display:none;
-        position:fixed;
-        top:0;
-        left:0;
-        width:100vw;
-        height:100vh;
-        background:rgba(0,0,0,0.6);
-        backdrop-filter: blur(2px);
-        z-index:999;
-        transition: opacity 0.3s ease;
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: rgba(0,0,0,0.8) !important;
+        backdrop-filter: blur(5px) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+        z-index: 999 !important;
+        transition: all 0.3s ease !important;
+        opacity: 0;
       }
-      .mobile-overlay.active{display:block}
+      
+      .mobile-overlay.active{
+        display: block !important;
+        opacity: 1 !important;
+      }
       
       /* Ajustar header mobile */
-      header { padding: 12px 0; }
-      .mobile-menu-btn { 
-        position: relative; 
-        z-index: 1001; 
-        padding: 8px; 
-        margin-left: auto;
-        border-radius: 8px;
-        transition: all 0.3s ease;
+      header { 
+        padding: 15px 0 !important; 
+        position: relative !important;
+        z-index: 1001 !important;
       }
+      
+      .mobile-menu-btn { 
+        position: relative !important; 
+        z-index: 1002 !important; 
+        padding: 12px !important; 
+        margin-left: auto !important;
+        border-radius: 10px !important;
+        background: rgba(255,255,255,0.1) !important;
+        transition: all 0.3s ease !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+      }
+      
       .mobile-menu-btn:hover {
-        background: rgba(255,255,255,0.1);
+        background: rgba(124,58,237,0.3) !important;
+        border-color: rgba(124,58,237,0.5) !important;
+        transform: scale(1.1) !important;
+      }
+      
+      .mobile-menu-btn svg {
+        width: 28px !important;
+        height: 28px !important;
       }
     }
 
@@ -344,6 +385,9 @@
 </head>
 <body>
   <div class="container">
+    <!-- Overlay do menu mobile -->
+    <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
+    
     <header>
       <div class="brand">
         <a href="http://100.105.234.44:81/#/login" target="_blank" rel="noopener" class="logo-link">
@@ -364,8 +408,6 @@
           <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </button>
-      
-      <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
       
       <nav id="mobile-nav">
         <a href="#projetos" onclick="closeMobileMenu(); smoothScrollTo('projetos'); return false;">📁 Projetos</a>
@@ -674,22 +716,32 @@
       const btn = document.querySelector('.mobile-menu-btn');
       const body = document.body;
       
-      if (!nav || !overlay || !btn) return;
+      console.log('toggleMobileMenu chamado'); // Debug
+      
+      if (!nav || !overlay || !btn) {
+        console.error('Elementos não encontrados:', { nav, overlay, btn });
+        return;
+      }
       
       const isActive = nav.classList.contains('active');
       
       if (isActive) {
         // Fechar menu
+        console.log('Fechando menu');
         nav.classList.remove('active');
         overlay.classList.remove('active');
         btn.style.transform = 'rotate(0deg)';
         body.style.overflow = '';
+        body.style.position = '';
       } else {
         // Abrir menu
+        console.log('Abrindo menu');
         nav.classList.add('active');
         overlay.classList.add('active');
         btn.style.transform = 'rotate(180deg)';
-        body.style.overflow = 'hidden'; // Previne scroll do body
+        body.style.overflow = 'hidden';
+        body.style.position = 'fixed';
+        body.style.width = '100%';
       }
     }
     
@@ -699,12 +751,16 @@
       const btn = document.querySelector('.mobile-menu-btn');
       const body = document.body;
       
+      console.log('closeMobileMenu chamado'); // Debug
+      
       if (!nav || !overlay || !btn) return;
       
       nav.classList.remove('active');
       overlay.classList.remove('active');
       btn.style.transform = 'rotate(0deg)';
       body.style.overflow = '';
+      body.style.position = '';
+      body.style.width = '';
     }
     
     // Fechar menu ao redimensionar a tela
