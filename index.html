@@ -739,12 +739,15 @@
       RODAPÉ
       ======
       Informações finais da página com estilo discreto.
+      Garantindo visibilidade mesmo se animação falhar.
     */
     footer{
       margin-top:40px;
       color:var(--muted);                /* Cor discreta */
       font-size:13px;                    /* Texto pequeno */
-      text-align:center
+      text-align:center;
+      opacity: 1 !important;            /* Força visibilidade */
+      padding-bottom: 20px;             /* Espaço extra no final */
     }
 
     /* 
@@ -1752,13 +1755,21 @@
       INICIALIZAÇÃO DAS ANIMAÇÕES DE SCROLL
       ====================================
       Prepara elementos para serem animados quando ficarem visíveis.
+      Footer mantém visibilidade para evitar problemas.
     */
     document.addEventListener('DOMContentLoaded', () => {
-      const elementsToAnimate = document.querySelectorAll('.contact, footer');
+      const elementsToAnimate = document.querySelectorAll('.contact');
       elementsToAnimate.forEach(el => {
         el.style.opacity = '0';    // Começa invisível
         observer.observe(el);      // Observa para animar quando aparecer
       });
+      
+      // Footer sempre visível para evitar problemas
+      const footer = document.querySelector('footer');
+      if (footer) {
+        footer.style.opacity = '1';
+        footer.style.animation = 'fadeInUp 0.6s ease-out forwards';
+      }
     });
   </script>
 </body>
